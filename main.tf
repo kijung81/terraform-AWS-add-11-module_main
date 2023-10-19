@@ -1,4 +1,4 @@
-module "network" {
+module "add-11-module_network" {
   source  = "app.terraform.io/Golfzon/add-11-module_network/AWS"
   version = "1.0.0"
   vpc_cidr = var.vpc_cidr
@@ -11,21 +11,21 @@ module "network" {
   prefix      = var.prefix
 }
 
-module "sg" {
+module "add-11-module_sg" {
   source  = "app.terraform.io/Golfzon/add-11-module_sg/AWS"
   version = "1.0.0"
-  vpc_id = module.network.vpc_id
+  vpc_id = module.add-11-module_network.vpc_id
   
   sg_in_cidr = var.sg_in_cidr
   prefix = var.prefix
 }
 
-module rds {
+module "add-11-module_rds" {
   source  = "app.terraform.io/Golfzon/add-11-module_rds/AWS"
   version = "1.0.0"
-  dbpri_subnet_a_id = module.network.dbpri_subnet_a_id
-  dbpri_subnet_c_id = module.network.dbpri_subnet_c_id
-  sg_id   = module.sg.sg_id
+  dbpri_subnet_a_id = module.add-11-module_network.dbpri_subnet_a_id
+  dbpri_subnet_c_id = module.add-11-module_network.dbpri_subnet_c_id
+  sg_id   = module.add-11-module_sg.sg_id
   
   db_ins_cls = var.db_ins_cls
   rds_dbname = var.rds_dbname
@@ -34,24 +34,24 @@ module rds {
   prefix = var.prefix
 }
 
-module web {
+module "add-11-module_web" {
   source  = "app.terraform.io/Golfzon/add-11-module_web/AWS"
   version = "1.0.0"
-  pub_subnet_a_id = module.network.pub_subnet_a_id
-  pub_subnet_c_id = module.network.pub_subnet_c_id
-  sg_id   = module.sg.sg_id
+  pub_subnet_a_id = module.add-11-module_network.pub_subnet_a_id
+  pub_subnet_c_id = module.add-11-module_network.pub_subnet_c_id
+  sg_id   = module.add-11-module_sg.sg_id
   
   ec2_key = var.ec2_key
   web_ec2_type = var.web_ec2_type
   prefix = var.prefix
 }
 
-module was {
+module "add-11-module_was" {
   source = "app.terraform.io/Golfzon/add-11-module_was/AWS"
   version = "1.0.0"
-  pri_subnet_a_id = module.network.pri_subnet_a_id
-  pri_subnet_c_id = module.network.pri_subnet_c_id
-  sg_id   = module.sg.sg_id
+  pri_subnet_a_id = module.add-11-module_network.pri_subnet_a_id
+  pri_subnet_c_id = module.add-11-module_network.pri_subnet_c_id
+  sg_id   = module.add-11-module_sg.sg_id
   
   ec2_key = var.ec2_key
   was_ec2_type = var.was_ec2_type
