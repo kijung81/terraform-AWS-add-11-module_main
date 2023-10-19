@@ -34,7 +34,7 @@ variable dbpri_c_cidr {
 
 ##### secrutiy group #####
 variable sg_in_cidr {
-  default = "0.0.0.0/0"
+  default = "172.20.10.0/24"
 }
 
 ###### ec2 web was ######
