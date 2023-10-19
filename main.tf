@@ -1,5 +1,5 @@
 module "add-11-module_network" {
-  source  = "app.terraform.io/Golfzon/add-11-module_network/AWS"
+  source  = "app.terraform.io/Golfzon/add-11-module_network/aws"
   version = "1.0.0"
   vpc_cidr = var.vpc_cidr
   pub_a_cidr = var.pub_a_cidr
@@ -12,7 +12,7 @@ module "add-11-module_network" {
 }
 
 module "add-11-module_sg" {
-  source  = "app.terraform.io/Golfzon/add-11-module_sg/AWS"
+  source  = "app.terraform.io/Golfzon/add-11-module_sg/aws"
   version = "1.0.0"
   vpc_id = module.add-11-module_network.vpc_id
   
@@ -21,7 +21,7 @@ module "add-11-module_sg" {
 }
 
 module "add-11-module_rds" {
-  source  = "app.terraform.io/Golfzon/add-11-module_rds/AWS"
+  source  = "app.terraform.io/Golfzon/add-11-module_rds/aws"
   version = "1.0.0"
   dbpri_subnet_a_id = module.add-11-module_network.dbpri_subnet_a_id
   dbpri_subnet_c_id = module.add-11-module_network.dbpri_subnet_c_id
@@ -35,7 +35,7 @@ module "add-11-module_rds" {
 }
 
 module "add-11-module_web" {
-  source  = "app.terraform.io/Golfzon/add-11-module_web/AWS"
+  source  = "app.terraform.io/Golfzon/add-11-module_web/aws"
   version = "1.0.0"
   pub_subnet_a_id = module.add-11-module_network.pub_subnet_a_id
   pub_subnet_c_id = module.add-11-module_network.pub_subnet_c_id
@@ -47,7 +47,7 @@ module "add-11-module_web" {
 }
 
 module "add-11-module_was" {
-  source = "app.terraform.io/Golfzon/add-11-module_was/AWS"
+  source = "app.terraform.io/Golfzon/add-11-module_was/aws"
   version = "1.0.0"
   pri_subnet_a_id = module.add-11-module_network.pri_subnet_a_id
   pri_subnet_c_id = module.add-11-module_network.pri_subnet_c_id
